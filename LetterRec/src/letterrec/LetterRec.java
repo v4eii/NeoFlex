@@ -13,14 +13,14 @@ public class LetterRec {
 
     public static void main(String[] args)
     {
-        new LetterRec();
+        new LetterRec();    //132
     }
     
     public LetterRec()
     {
         EventQueue.invokeLater(() ->
         {
-            JFrame frame = new JFrame("Тест");
+            JFrame frame = new JFrame("Г’ГҐГ±ГІ");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLayout(new BorderLayout());
             frame.add(new Pane());
