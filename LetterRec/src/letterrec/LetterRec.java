@@ -13,7 +13,7 @@ public class LetterRec {
 
     public static void main(String[] args)
     {
-        new LetterRec();    //1323
+        new LetterRec();
     }
     
     public LetterRec()
