@@ -115,7 +115,7 @@ public class Pane extends JPanel {
         @Override
         public Dimension getPreferredSize()
         {
-            return new Dimension(50, 50);
+            return new Dimension(50, 50);   //123
         }
         
     }
