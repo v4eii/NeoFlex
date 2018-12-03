@@ -64,17 +64,24 @@ public class LetterRec {
             btnTeach.addActionListener((ActionEvent e) ->
             {
                 int tmp[] = new int[columnCount*rowCount];
-                for (int i = 0; i < rowCount; i++)
+                for (int i = 0, p = 0; i < rowCount; i++)
                 {
                     for (int j = 0; j < columnCount; j++)
                     {
                         if (drawPane.getCellPanes()[i][j].getBackground().equals(Color.BLACK))
-                            tmp[i+j] = 1;
+                        {
+                            tmp[p] = 1;
+                            p++;
+                        }
                         else
-                            tmp[i+j] = 0;
+                        {
+                            tmp[p] = 0;
+                            p++;
+                        }
                     }
                 }
-                System.out.println(textField.getText() + Arrays.toString(tmp));             // TODO дописать
+                System.out.println("Введенный символ: " + (textField.getText().equals("") ? "!А символа то нет!" : textField.getText()) + 
+                                    " и боольшой набор 1 и 0\n" + Arrays.toString(tmp));
             });
             
             pane.setPreferredSize(new Dimension(400, 250));
