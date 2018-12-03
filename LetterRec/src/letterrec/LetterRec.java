@@ -23,7 +23,7 @@ public class LetterRec {
             JFrame frame = new JFrame("Òåñò");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLayout(new BorderLayout());
-            frame.add(new Pane());
+            frame.add(new Pane(10 ,15));
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setMinimumSize(new Dimension(600, 600));
