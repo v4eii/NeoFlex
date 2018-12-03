@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 
 
@@ -114,9 +113,9 @@ public class Pane extends JPanel {
     }
 
     /**
-     * Ð—Ð°ÐºÑ€Ð°ÑˆÐ¸Ð²Ð°ÐµÑ‚ ÑÑ‡ÐµÐ¹ÐºÐ¸ Ð¿Ð¾ Ð¼ÐµÑ€Ðµ Ð¿ÐµÑ€ÐµÐ¼ÐµÑˆÐµÐ½Ð¸Ñ ÐºÑƒÑ€ÑÐ¾Ñ€Ð°
-     * @param cellPane Ñ‚ÐµÐºÑƒÑˆÐ°Ñ ÑÑ‡ÐµÐ¹ÐºÐ° Ð½Ð°Ð´ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ ÐºÑƒÑ€ÑÐ¾Ñ€
-     */
+     * Çàêðàøèâàåò ÿ÷åéêè ïî ìåðå ïåðåìåøåíèÿ êóðñîðà
+     * @param cellPane òåêóøàÿ ÿ÷åéêà íàä êîòîðîé êóðñîð
+     */ 
     private void drawCursorAnimation(CellPane cellPane) {
         if (BACKGROUND_COLOR.equals(cellPane.getBackground())) {
             if (lastMovedCells[SNAKE_TAIL-1] != null) {
@@ -133,7 +132,7 @@ public class Pane extends JPanel {
     }
 
     /**
-     * ÐžÑ‡Ð¸ÑˆÐ°ÐµÑ‚ Ð·Ð°ÐºÑ€Ð°ÑˆÐµÐ½Ð½Ñ‹Ðµ ÑÑ‡ÐµÐ¹ÐºÐ¸
+     * Î÷èøàåò çàêðàøåííûå ÿ÷åéêè
      */
     private void clearCursorAnimation() {
         for (CellPane cellPane : lastMovedCells) {
@@ -145,22 +144,22 @@ public class Pane extends JPanel {
     }
 
     /**
-     * ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÑ‚ Ð½Ð°Ð´ ÐºÐ°ÐºÐ¾Ð¹ ÑÑ‡ÐµÐ¹ÐºÐ¾Ð¹ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ ÐºÑƒÑ€ÑÐ¾Ñ€
+     * Îïðåäåëÿåò íàä êàêîé ÿ÷åéêîé íàõîäèòñÿ êóðñîð
      *
-     * @param e Ð¡Ð¾Ð±Ñ‹Ñ‚Ð¸Ðµ, Ð½Ð° Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ðµ Ð¼Ñ‹ÑˆÐ¸
-     * @return Ð¯Ñ‡ÐµÐ¹ÐºÐ° Ð½Ð°Ð´ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ ÐºÑƒÑ€ÑÐ¾Ñ€
+     * @param e Ñîáûòèå, íà äåéñòâèå ìûøè
+     * @return ß÷åéêà íàä êîòîðîé íàõîäèòñÿ êóðñîð
      */
     private CellPane getClickedPane(MouseEvent e) {
-        // Ð˜Ð· ÐºÐ¾Ð¾Ñ€Ð´Ð½Ð°Ñ‚ Ð¼Ñ‹ÑˆÐºÐ¸ Ð²Ñ‹Ñ‡ÐµÑ‚Ð°ÐµÐ¼ Ñ€Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ñ Ð´Ð¾ Ð¿ÐµÑ€Ð²Ð¾Ð¹ ÑÑ‡ÐµÐ¹ÐºÐ¸
+        // Èç êîîðäíàò ìûøêè âû÷åòàåì ðàññòîÿíèÿ äî ïåðâîé ÿ÷åéêè
         int x = e.getX() - cellPanes[0][0].getX();
         int y = e.getY() - cellPanes[0][0].getY();
 
-        // ÐŸÑ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼, Ñ‡Ñ‚Ð¾ ÐºÑƒÑ€ÑÐ¾Ñ€ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ Ð² Ñ€Ð°Ð±Ð¾Ñ‡ÐµÐ¹ Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸
+        // Ïðîâåðÿåì, ÷òî êóðñîð íàõîäèòñÿ â ðàáî÷åé îáëàñòè
         boolean clickedInWorkspace = x >= 0 && y >= 0 && x < WORKSPACE_WIDTH && y < WORKSPACE_HEIGHT;
 
-        System.out.print(x);
-        System.out.print("   ");
-        System.out.println(y);
+//        System.out.print(x);
+//        System.out.print("   ");
+//        System.out.println(y);
         if (clickedInWorkspace) {
             return cellPanes[x / CELL_SIZE][y / CELL_SIZE];
         }
@@ -175,6 +174,16 @@ public class Pane extends JPanel {
             return new Dimension(CELL_SIZE, CELL_SIZE);
         }
 
+    }
+
+    public CellPane[][] getCellPanes()
+    {
+        return cellPanes;
+    }
+
+    public Color getBackgroundColor()
+    {
+        return BACKGROUND_COLOR;
     }
 
 }
