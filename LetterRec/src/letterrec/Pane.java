@@ -16,8 +16,7 @@ import javax.swing.border.MatteBorder;
  */
 public class Pane extends JPanel {
 
-    private static final int CELL_SIZE = 50;
-    private static final int SNAKE_TAIL = 15;
+    private static final int SNAKE_TAIL = 5;
 
     private final int WORKSPACE_WIDTH;
     private final int WORKSPACE_HEIGHT;
@@ -32,13 +31,17 @@ public class Pane extends JPanel {
         }
     }
 
+    private final int CELL_SIZE;
     private CellPane[][] cellPanes;
 
     private CellPane[] lastMovedCells = new CellPane[SNAKE_TAIL];
 
 
+    public Pane(int rowCount, int columnCount, int paneWidth, int paneHeight) {
+        int cellSizeByWidth = paneWidth/columnCount;
+        int cellSizeByHeight = paneHeight/rowCount;
+        CELL_SIZE = cellSizeByWidth < cellSizeByHeight ? cellSizeByWidth : cellSizeByHeight;
 
-    public Pane(int rowCount, int columnCount) {
         this.WORKSPACE_WIDTH = columnCount * CELL_SIZE;
         this.WORKSPACE_HEIGHT = rowCount * CELL_SIZE;
         this.cellPanes = new CellPane[columnCount][rowCount];
@@ -144,6 +147,17 @@ public class Pane extends JPanel {
     }
 
     /**
+     * Очищает панель
+     */
+    public void clearPane() {
+        for (int row = 0; row < cellPanes[0].length; row++) {
+            for (int column = 0; column < cellPanes.length; column++) {
+                cellPanes[row][column].setBackground(BACKGROUND_COLOR);
+            }
+        }
+    }
+
+    /**
      * Определяет над какой ячейкой находится курсор
      *
      * @param e Событие, на действие мыши
@@ -157,9 +171,6 @@ public class Pane extends JPanel {
         // Проверяем, что курсор находится в рабочей области
         boolean clickedInWorkspace = x >= 0 && y >= 0 && x < WORKSPACE_WIDTH && y < WORKSPACE_HEIGHT;
 
-//        System.out.print(x);
-//        System.out.print("   ");
-//        System.out.println(y);
         if (clickedInWorkspace) {
             return cellPanes[x / CELL_SIZE][y / CELL_SIZE];
         }
@@ -176,14 +187,8 @@ public class Pane extends JPanel {
 
     }
 
-    public CellPane[][] getCellPanes()
-    {
+    public CellPane[][] getCellPanes() {
         return cellPanes;
-    }
-
-    public Color getBackgroundColor()
-    {
-        return BACKGROUND_COLOR;
     }
 
 }
