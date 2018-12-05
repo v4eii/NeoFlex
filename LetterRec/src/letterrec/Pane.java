@@ -116,8 +116,8 @@ public class Pane extends JPanel {
     }
 
     /**
-     * Закрашивает ячейки по мере перемешения курсора
-     * @param cellPane текушая ячейка над которой курсор
+     * Р—Р°РєСЂР°С€РёРІР°РµС‚ СЏС‡РµР№РєРё РїРѕ РјРµСЂРµ РїРµСЂРµРјРµС€РµРЅРёСЏ РєСѓСЂСЃРѕСЂР°
+     * @param cellPane С‚РµРєСѓС€Р°СЏ СЏС‡РµР№РєР° РЅР°Рґ РєРѕС‚РѕСЂРѕР№ РєСѓСЂСЃРѕСЂ
      */ 
     private void drawCursorAnimation(CellPane cellPane) {
         if (BACKGROUND_COLOR.equals(cellPane.getBackground())) {
@@ -135,7 +135,7 @@ public class Pane extends JPanel {
     }
 
     /**
-     * Очишает закрашенные ячейки
+     * РћС‡РёС€Р°РµС‚ Р·Р°РєСЂР°С€РµРЅРЅС‹Рµ СЏС‡РµР№РєРё
      */
     private void clearCursorAnimation() {
         for (CellPane cellPane : lastMovedCells) {
@@ -147,7 +147,7 @@ public class Pane extends JPanel {
     }
 
     /**
-     * Очищает панель
+     * РћС‡РёС‰Р°РµС‚ РїР°РЅРµР»СЊ
      */
     public void clearPane() {
         for (int row = 0; row < cellPanes[0].length; row++) {
@@ -158,17 +158,17 @@ public class Pane extends JPanel {
     }
 
     /**
-     * Определяет над какой ячейкой находится курсор
+     * РћРїСЂРµРґРµР»СЏРµС‚ РЅР°Рґ РєР°РєРѕР№ СЏС‡РµР№РєРѕР№ РЅР°С…РѕРґРёС‚СЃСЏ РєСѓСЂСЃРѕСЂ
      *
-     * @param e Событие, на действие мыши
-     * @return Ячейка над которой находится курсор
+     * @param e РЎРѕР±С‹С‚РёРµ, РЅР° РґРµР№СЃС‚РІРёРµ РјС‹С€Рё
+     * @return РЇС‡РµР№РєР° РЅР°Рґ РєРѕС‚РѕСЂРѕР№ РЅР°С…РѕРґРёС‚СЃСЏ РєСѓСЂСЃРѕСЂ
      */
     private CellPane getClickedPane(MouseEvent e) {
-        // Из коорднат мышки вычетаем расстояния до первой ячейки
+        // РР· РєРѕРѕСЂРґРЅР°С‚ РјС‹С€РєРё РІС‹С‡РµС‚Р°РµРј СЂР°СЃСЃС‚РѕСЏРЅРёСЏ РґРѕ РїРµСЂРІРѕР№ СЏС‡РµР№РєРё
         int x = e.getX() - cellPanes[0][0].getX();
         int y = e.getY() - cellPanes[0][0].getY();
 
-        // Проверяем, что курсор находится в рабочей области
+        // РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ РєСѓСЂСЃРѕСЂ РЅР°С…РѕРґРёС‚СЃСЏ РІ СЂР°Р±РѕС‡РµР№ РѕР±Р»Р°СЃС‚Рё
         boolean clickedInWorkspace = x >= 0 && y >= 0 && x < WORKSPACE_WIDTH && y < WORKSPACE_HEIGHT;
 
         if (clickedInWorkspace) {

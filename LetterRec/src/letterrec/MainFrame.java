@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
     private int rowCount = 10;
     private int columnCount = 10;
 
-    // Панелька для отрисовки
+    // РџР°РЅРµР»СЊРєР° РґР»СЏ РѕС‚СЂРёСЃРѕРІРєРё
     private Pane drawPane;
 
 
@@ -59,18 +59,18 @@ public class MainFrame extends JFrame {
             });
         }};
 
-        JButton btnClear = new JButton("Очистить") {{
+        JButton btnClear = new JButton("РћС‡РёСЃС‚РёС‚СЊ") {{
             addActionListener((ActionEvent e) -> drawPane.clearPane());
         }};
 
-        btnTeach = new JButton("Обучить") {{
+        btnTeach = new JButton("РћР±СѓС‡РёС‚СЊ") {{
             addActionListener((ActionEvent e) -> learning());
             setEnabled(false);
         }};
 
         Container symbolContainer = new Container() {{
             setLayout(new FlowLayout(FlowLayout.LEFT));
-            add(new JLabel("Символ"));
+            add(new JLabel("РЎРёРјРІРѕР»"));
             add(textField);
             add(btnTeach);
         }};
@@ -97,8 +97,8 @@ public class MainFrame extends JFrame {
                 }
             }
         }
-        System.out.println("Введенный символ: " + (textField.getText().equals("") ? "!А символа то нет!" : textField.getText()) +
-                " и боольшой набор 1 и 0\n" + Arrays.toString(tmp));
+        System.out.println("Р’РІРµРґРµРЅРЅС‹Р№ СЃРёРјРІРѕР»: " + (textField.getText().equals("") ? "!Рђ СЃРёРјРІРѕР»Р° С‚Рѕ РЅРµС‚!" : textField.getText()) +
+                " Рё Р±РѕРѕР»СЊС€РѕР№ РЅР°Р±РѕСЂ 1 Рё 0\n" + Arrays.toString(tmp));
     }
 
 }
