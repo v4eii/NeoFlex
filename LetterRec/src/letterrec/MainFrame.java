@@ -19,8 +19,8 @@ public class MainFrame extends JFrame {
     private static final int HEIGHT = 900;
 
 
-    private int rowCount = 10;
-    private int columnCount = 10;
+    private final int rowCount = 10;
+    private final int columnCount = 10;
 
     // Панелька для отрисовки
     private Pane drawPane;
@@ -84,21 +84,28 @@ public class MainFrame extends JFrame {
         add(pane1);
     }
 
-    private void learning() {
+    private void learning()
+    {
         int[] tmp = new int[columnCount * rowCount];
-        for (int i = 0, p = 0; i < rowCount; i++) {
-            for (int j = 0; j < columnCount; j++) {
-                if (drawPane.getCellPanes()[i][j].getBackground().equals(Color.BLACK)) {
+        for (int i = 0, p = 0; i < rowCount; i++)
+        {
+            for (int j = 0; j < columnCount; j++)
+            {
+                if (drawPane.getCellPanes()[i][j].getBackground().equals(Color.BLACK))
+                {
                     tmp[p] = 1;
                     p++;
-                } else {
+                }
+                else
+                {
                     tmp[p] = 0;
                     p++;
                 }
             }
         }
-        System.out.println("Введенный символ: " + (textField.getText().equals("") ? "!А символа то нет!" : textField.getText()) +
-                " и боольшой набор 1 и 0\n" + Arrays.toString(tmp));
+        System.out.println("Введенный символ: " + (textField.getText().equals("") ? "!А символа то нет!" : textField.getText())
+                + " и боольшой набор 1 и 0\n" + Arrays.toString(tmp));
+        drawPane.stretch();
     }
 
 }

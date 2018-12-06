@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
@@ -20,6 +22,8 @@ public class Pane extends JPanel {
 
     private final int WORKSPACE_WIDTH;
     private final int WORKSPACE_HEIGHT;
+    private final int columnCount,
+                      rowCount;
     private final Color BACKGROUND_COLOR;
     private final Color[] LAST_MOVED_CELLS_COLOR = new Color[SNAKE_TAIL];
     {
@@ -40,6 +44,8 @@ public class Pane extends JPanel {
     public Pane(int rowCount, int columnCount, int paneWidth, int paneHeight) {
         int cellSizeByWidth = paneWidth/columnCount;
         int cellSizeByHeight = paneHeight/rowCount;
+        this.columnCount = columnCount;
+        this.rowCount = rowCount;
         CELL_SIZE = cellSizeByWidth < cellSizeByHeight ? cellSizeByWidth : cellSizeByHeight;
 
         this.WORKSPACE_WIDTH = columnCount * CELL_SIZE;
@@ -186,9 +192,82 @@ public class Pane extends JPanel {
         }
 
     }
+    
+    public void stretch()
+    {
+        List<List<Double>> steps = new ArrayList<>();
+        boolean first = true;
+        int posY = 0,
+            posX = 0,
+            lastPosX = 0,
+            lastPosY = 0;
+        
+        if (!steps.isEmpty())
+            steps.clear();
+        
+        for (int i = 0; i < columnCount; i++)
+        {
+            for (int j = 0; j < rowCount; j++)
+            {
+                if (cellPanes[i][j].getBackground().equals(Color.BLACK))
+                {
+                    if (first)
+                    {
+                        posX = j+1;
+                        posY = i+1;
+                        first = false;
+                    }
+                    lastPosX = j+1;
+                    lastPosY = i+1;
+                }
+            }
+        }
+        
+        System.out.println(posX + " " + posY);
+        System.out.println(lastPosX + " " + lastPosY);
+        System.out.println("weight = " + (lastPosX - posX + 1));
+        System.out.println("height = " + (lastPosY - posY + 1));
+        
+        lastPosX = lastPosX - posX + 1;
+        
+        double step = 1.0/lastPosX;
+        
+        boolean started = false;
+        int posList = 0;
+        for (int i = 0; i < columnCount; i++)
+        {
+            double tmp = 0;
+            boolean stopStep = true;
+            for (int j = 0; j < rowCount; j++)
+            {
+                if (cellPanes[i][j].getBackground().equals(Color.BLACK) && stopStep)
+                {
+                    if (steps.size() < posList + 1 || steps.isEmpty())
+                        steps.add(new ArrayList<>());
+                    steps.get(posList).add(tmp);
+                    stopStep = false;
+                    if (!started)
+                        started = true;
+                }
+                else if ((!cellPanes[i][j].getBackground().equals(Color.BLACK) && !stopStep))
+                {
+                    steps.get(posList).add(tmp);
+                    stopStep = true;
+                }
+                if (started && j + 1 >= posX)
+                    tmp += step;
+            }
+            if (started)
+                posList++;
+        }
+        steps.forEach((t) ->
+        {
+            System.out.println(t.toString() + " ");
+        });
+    }
 
     public CellPane[][] getCellPanes() {
         return cellPanes;
     }
-
+    
 }
