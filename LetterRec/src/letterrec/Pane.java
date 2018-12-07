@@ -195,6 +195,22 @@ public class Pane extends JPanel {
 
     }
     
+    private boolean checkSize(int x, int y)
+    {
+        for (int i = 0; i < columnCount; i++)
+        {
+            if (cellPanes[i][x].getBackground().equals(Color.BLACK))
+            {
+                for (int j = 0; j < rowCount; j++)
+                {
+                    if (cellPanes[y][j].getBackground().equals(Color.BLACK))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     public void stretchY()
     {
         
@@ -214,7 +230,7 @@ public class Pane extends JPanel {
         {
             for (int j = 0; j < rowCount; j++)
             {
-                if (cellPanes[i][j].getBackground().equals(Color.BLACK))
+                if (cellPanes[i][j].getBackground().equals(Color.BLACK) || checkSize(j, i))
                 {
                     if (first)
                     {
@@ -222,8 +238,8 @@ public class Pane extends JPanel {
                         posY = i+1;
                         first = false;
                     }
-                    lastPosX = j+1;
-                    lastPosY = i+1;
+                        lastPosX = j + 1;
+                        lastPosY = i + 1;
                 }
             }
         }
@@ -239,11 +255,11 @@ public class Pane extends JPanel {
         
         boolean started = false;
         int posList = 0;
-        for (int i = 0; i < columnCount; i++)
+        for (int i = posY - 1; i <= lastPosY; i++)
         {
             double tmp = 0;
             boolean stopStep = true;
-            for (int j = 0; j < rowCount; j++)
+            for (int j = posX - 1; j <= lastPosX; j++)
             {
                 if (cellPanes[i][j].getBackground().equals(Color.BLACK) && stopStep)
                 {
@@ -259,12 +275,36 @@ public class Pane extends JPanel {
                     steps.get(posList).add(tmp);
                     stopStep = true;
                 }
-                if (started && j + 1 >= posX)
-                    tmp += step;
+                tmp += step;
             }
-            if (started)
-                posList++;
+            posList++;
         }
+        
+        // Альтернативный
+//        for (int i = posY - 1, kol = 0; kol <= lastPosY - posY + 1; i++, kol++)
+//        {
+//            double tmp = 0;
+//            boolean stopStep = true;
+//            for (int j = posX - 1, kol1 = 0; kol1 <= lastPosX; j++,kol1++)
+//            {
+//                if (cellPanes[i][j].getBackground().equals(Color.BLACK) && stopStep)
+//                {
+//                    
+//                    steps.get(posList).add(tmp);
+//                    stopStep = false;
+//                    if (!started)
+//                        started = true;
+//                }
+//                else if ((!cellPanes[i][j].getBackground().equals(Color.BLACK) && !stopStep))
+//                {
+//                    steps.get(posList).add(tmp);
+//                    stopStep = true;
+//                }
+//                tmp += step;
+//            }
+//            posList++;
+//        }
+        
         steps.forEach((t) ->
         {
             System.out.println(t.toString() + " ");
@@ -281,10 +321,10 @@ public class Pane extends JPanel {
         for (int i = 0; i < columnCount; i++)
         {
             double tmp = 0;
+            if (posList > steps.size() - 1)
+                break;
             for (int j = 0; j < rowCount; j++)
             {
-                if (posList > steps.size() - 1)
-                    break;
                 if (df.format(steps.get(posList).get(posNumber >= steps.get(posList).size() - 1 ? steps.get(posList).size() - 1 : posNumber)).equals(df.format(tmp)) && !started)
                 {
                     cellPanes[i][j].setBackground(Color.BLACK);
@@ -328,7 +368,7 @@ public class Pane extends JPanel {
         {
             for (int j = 0; j < rowCount; j++)
             {
-                if (cellPanes[i][j].getBackground().equals(Color.BLACK))
+                if (cellPanes[i][j].getBackground().equals(Color.BLACK) || checkSize(j, i))
                 {
                     if (first)
                     {
@@ -373,11 +413,9 @@ public class Pane extends JPanel {
                     steps.get(posList).add(tmp);
                     stopStep = true;
                 }
-                if (started && j + 1 >= posX)
-                    tmp += step;
+                tmp += step;
             }
-            if (started)
-                posList++;
+            posList++;
         }
         steps.forEach((t) ->
         {
@@ -395,10 +433,10 @@ public class Pane extends JPanel {
         for (int i = 0; i < columnCount; i++)
         {
             double tmp = 0;
+            if (posList > steps.size() - 1)
+                break;
             for (int j = 0; j < rowCount; j++)
             {
-                if (posList > steps.size() - 1)
-                    break;
                 if (df.format(steps.get(posList).get(posNumber >= steps.get(posList).size() - 1 ? steps.get(posList).size() - 1 : posNumber)).equals(df.format(tmp)) && !started)
                 {
                     cellPanes[j][i].setBackground(Color.BLACK);

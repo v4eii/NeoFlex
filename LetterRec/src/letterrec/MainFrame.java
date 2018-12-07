@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Arrays;
 
 
 /**
@@ -103,8 +102,8 @@ public class MainFrame extends JFrame {
                 }
             }
         }
-        System.out.println("Введенный символ: " + (textField.getText().equals("") ? "!А символа то нет!" : textField.getText())
-                + " и боольшой набор 1 и 0\n" + Arrays.toString(tmp));
+//        System.out.println("Введенный символ: " + (textField.getText().equals("") ? "!А символа то нет!" : textField.getText())
+//                + " и боольшой набор 1 и 0\n" + Arrays.toString(tmp));
         
         drawPane.stretchY();
         drawPane.stretchX();
