@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -193,8 +195,11 @@ public class Pane extends JPanel {
 
     }
     
-    public void stretch()
+    public void stretchY()
     {
+        
+        clearCursorAnimation();
+        
         List<List<Double>> steps = new ArrayList<>();
         boolean first = true;
         int posY = 0,
@@ -264,6 +269,158 @@ public class Pane extends JPanel {
         {
             System.out.println(t.toString() + " ");
         });
+        
+        step = 1.0 / columnCount;
+
+        started = false;
+        posList = 0;
+        int posNumber = 0;
+        clearPane();
+        DecimalFormat df = new DecimalFormat("#.#");
+        df.setRoundingMode(RoundingMode.HALF_DOWN);
+        for (int i = 0; i < columnCount; i++)
+        {
+            double tmp = 0;
+            for (int j = 0; j < rowCount; j++)
+            {
+                if (posList > steps.size() - 1)
+                    break;
+                if (df.format(steps.get(posList).get(posNumber >= steps.get(posList).size() - 1 ? steps.get(posList).size() - 1 : posNumber)).equals(df.format(tmp)) && !started)
+                {
+                    cellPanes[i][j].setBackground(Color.BLACK);
+                    started = true;
+                    posNumber++;
+                }
+                else if (df.format(steps.get(posList).get(posNumber >= steps.get(posList).size() - 1 ? steps.get(posList).size() - 1 : posNumber)).equals(df.format(tmp)) && started)
+                {
+                    started = false;
+                    posNumber++;
+                }
+                else if (started)
+                {
+                    cellPanes[i][j].setBackground(Color.BLACK);
+                }
+                tmp += step;
+            }
+            posList++;
+            if (started)
+                started = false;
+            posNumber = 0;
+        }
+    }
+    
+    public void stretchX()
+    {
+        
+        clearCursorAnimation();
+        
+        List<List<Double>> steps = new ArrayList<>();
+        boolean first = true;
+        int posY = 0,
+            posX = 0,
+            lastPosX = 0,
+            lastPosY = 0;
+        
+        if (!steps.isEmpty())
+            steps.clear();
+        
+        for (int i = 0; i < columnCount; i++)
+        {
+            for (int j = 0; j < rowCount; j++)
+            {
+                if (cellPanes[i][j].getBackground().equals(Color.BLACK))
+                {
+                    if (first)
+                    {
+                        posX = j+1;
+                        posY = i+1;
+                        first = false;
+                    }
+                    lastPosX = j+1;
+                    lastPosY = i+1;
+                }
+            }
+        }
+        
+        System.out.println(posX + " " + posY);
+        System.out.println(lastPosX + " " + lastPosY);
+        System.out.println("weight = " + (lastPosX - posX + 1));
+        System.out.println("height = " + (lastPosY - posY + 1));
+        
+        lastPosY = lastPosY - posY + 1;
+        
+        double step = 1.0/lastPosY;
+        
+        boolean started = false;
+        int posList = 0;
+        for (int i = 0; i < columnCount; i++)
+        {
+            double tmp = 0;
+            boolean stopStep = true;
+            for (int j = 0; j < rowCount; j++)
+            {
+                if (cellPanes[j][i].getBackground().equals(Color.BLACK) && stopStep)
+                {
+                    if (steps.size() < posList + 1 || steps.isEmpty())
+                        steps.add(new ArrayList<>());
+                    steps.get(posList).add(tmp);
+                    stopStep = false;
+                    if (!started)
+                        started = true;
+                }
+                else if ((!cellPanes[j][i].getBackground().equals(Color.BLACK) && !stopStep))
+                {
+                    steps.get(posList).add(tmp);
+                    stopStep = true;
+                }
+                if (started && j + 1 >= posX)
+                    tmp += step;
+            }
+            if (started)
+                posList++;
+        }
+        steps.forEach((t) ->
+        {
+            System.out.println(t.toString() + " ");
+        });
+        
+        step = 1.0 / rowCount;
+
+        started = false;
+        posList = 0;
+        int posNumber = 0;
+        clearPane();
+        DecimalFormat df = new DecimalFormat("#.#");
+        df.setRoundingMode(RoundingMode.HALF_DOWN);
+        for (int i = 0; i < columnCount; i++)
+        {
+            double tmp = 0;
+            for (int j = 0; j < rowCount; j++)
+            {
+                if (posList > steps.size() - 1)
+                    break;
+                if (df.format(steps.get(posList).get(posNumber >= steps.get(posList).size() - 1 ? steps.get(posList).size() - 1 : posNumber)).equals(df.format(tmp)) && !started)
+                {
+                    cellPanes[j][i].setBackground(Color.BLACK);
+                    started = true;
+                    posNumber++;
+                }
+                else if (df.format(steps.get(posList).get(posNumber >= steps.get(posList).size() - 1 ? steps.get(posList).size() - 1 : posNumber)).equals(df.format(tmp)) && started)
+                {
+                    started = false;
+                    posNumber++;
+                }
+                else if (started)
+                {
+                    cellPanes[j][i].setBackground(Color.BLACK);
+                }
+                tmp += step;
+            }
+            posList++;
+            if (started)
+                started = false;
+            posNumber = 0;
+        }
     }
 
     public CellPane[][] getCellPanes() {
