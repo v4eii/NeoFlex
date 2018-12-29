@@ -307,7 +307,7 @@ public class Pane extends JPanel {
             for (int j = 0; j < rowCount; j++)
             {
                 if (j >= rowCount/2)
-                    df.setRoundingMode(RoundingMode.HALF_UP);
+                    df.setRoundingMode(RoundingMode.HALF_UP);   // TODO Попробовать приводить числа в String, обрезать и тянуть из них float, до всех операций
                 
                 if ((steps.get(posList).get(posNumber >= steps.get(posList).size() - 1 ? steps.get(posList).size() - 1 : posNumber).equals(tmp.floatValue()) && !started)
                         || (df.format(steps.get(posList).get(posNumber >= steps.get(posList).size() - 1 ? steps.get(posList).size() - 1 : posNumber)).equals(df.format(tmp.floatValue())) && !started))

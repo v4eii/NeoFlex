@@ -18,8 +18,8 @@ public class MainFrame extends JFrame {
     private static final int HEIGHT = 480;
 
 
-    private final int rowCount = 10;
-    private final int columnCount = 10;
+    private final int rowCount = 20;
+    private final int columnCount = 20;
 
     // Панелька для отрисовки
     private Pane drawPane;
@@ -102,11 +102,11 @@ public class MainFrame extends JFrame {
                 }
             }
         }
-//        System.out.println("Введенный символ: " + (textField.getText().equals("") ? "!А символа то нет!" : textField.getText())
-//                + " и боольшой набор 1 и 0\n" + Arrays.toString(tmp));
+        //System.out.println("Введенный символ: " + (textField.getText().equals("") ? "!А символа то нет!" : textField.getText())
+          //      + " и боольшой набор 1 и 0\n" + Arrays.toString(tmp));
         
         drawPane.stretchY();
-        drawPane.stretchX();
+        //drawPane.stretchX();
     }
 
 }
