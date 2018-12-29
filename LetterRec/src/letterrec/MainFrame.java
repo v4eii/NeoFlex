@@ -14,8 +14,8 @@ import java.awt.event.KeyListener;
 public class MainFrame extends JFrame {
 
     private static final String TITLE = "Title(WOW)";
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 900;
+    private static final int WIDTH = 600;
+    private static final int HEIGHT = 480;
 
 
     private final int rowCount = 10;
@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
         setTitle(TITLE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(false);
+        //setResizable(false);
         setVisible(true);
         pack();
 
