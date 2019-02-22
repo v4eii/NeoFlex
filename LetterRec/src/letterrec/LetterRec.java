@@ -2,7 +2,6 @@ package letterrec;
 
 import java.awt.EventQueue;
 
-
 /**
  *
  * @author v4e
