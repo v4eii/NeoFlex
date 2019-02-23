@@ -440,6 +440,8 @@ public class Pane extends JPanel {
                     }
                     while (tmp < steps.get(posList).get(posNumber).getEndPos() && j >= rowCount/2)
                     {
+                        if (j >= rowCount)
+                            break;
                         cellPanes[i][j].setBackground(Color.BLACK);
                         tmp += step;
                         j++;
@@ -562,6 +564,8 @@ public class Pane extends JPanel {
                     }
                     while (tmp < steps.get(posList).get(posNumber).getEndPos() && j >= rowCount/2)
                     {
+                        if (j >= rowCount)
+                            break;
                         cellPanes[j][i].setBackground(Color.BLACK);
                         tmp += step;
                         j++;

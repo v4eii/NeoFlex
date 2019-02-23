@@ -16,8 +16,8 @@ public class MainFrame extends JFrame {
     private static final int WIDTH = 600;
     private static final int HEIGHT = 480;
 
-    private final int rowCount = 10;
-    private final int columnCount = 10;
+    private final int rowCount = 50;
+    private final int columnCount = 50;
     
     NeuralNetwork test = new NeuralNetwork(columnCount, rowCount);
 
