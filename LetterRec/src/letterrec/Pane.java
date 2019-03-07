@@ -193,6 +193,7 @@ public class Pane extends JPanel {
 
     }
     
+    // Проверка соответствия размера символа
     private boolean checkSize(int x, int y)
     {
         for (int i = 0; i < columnCount; i++)
@@ -209,6 +210,10 @@ public class Pane extends JPanel {
         return false;
     }
     
+    
+    /**
+     * Растягивание символа по Y координате (в высоту)
+     */
     public void stretchY()
     {
         clearCursorAnimation();
@@ -260,6 +265,8 @@ public class Pane extends JPanel {
             {
                 if (cellPanes[i][j].getBackground().equals(Color.BLACK))
                 {
+                    /* Внутреннее ветвление служит для отсеивания 
+                    шагов с пробегом по абсолютно пустому столбцу */
                     if (posList > steps.size() - 1 || steps.isEmpty())
                     {
                         steps.add(new ArrayList<>());
@@ -271,6 +278,10 @@ public class Pane extends JPanel {
                     }
                     steps.get(posList).add(new Distance(tmp));
                     
+                    /*
+                    Если была обнаружена точка начала промежутка, 
+                    запускается цикл для поиска конца промежутка
+                    */
                     for (int k = j+1;; k++)
                     {
                         tmp += oldStep;
@@ -314,6 +325,10 @@ public class Pane extends JPanel {
             {
                 if (posNumber > steps.get(posList).size() - 1)
                     break;
+                /*
+                Условие после || для правильной работы в случае неточности float/double, 
+                т.к. +- 0.5 от шага не изменят результат
+                */
                 if (tmp >= steps.get(posList).get(posNumber).getStartPos()
                         || (tmp + oldStep/2 > steps.get(posList).get(posNumber).getStartPos() && j < rowCount/2))
                 {
@@ -340,6 +355,9 @@ public class Pane extends JPanel {
         }
     }
     
+    /**
+     * Растягивание символа по X координате (в ширину)
+     */
     public void stretchX()
     {
         clearCursorAnimation();
@@ -477,6 +495,10 @@ public class Pane extends JPanel {
         return cellPanes;
     }
     
+    /**
+     * Класс содержащий начало и конец промежутка
+     * bool переменная для проверки отрисовки промежутка (сейчас бесполезна)
+     */
     class Distance
     {
         private Float startPos;

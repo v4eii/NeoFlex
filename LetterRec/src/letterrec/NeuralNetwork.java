@@ -22,6 +22,10 @@ public class NeuralNetwork
         this.rowCount = rowCount;
     }
     
+    /**
+     * Заполнение данных о символе
+     * @param symbol Строка из поля ввода символа
+     */
     public void recCharacter(String symbol)
     {
         findActiveSymbol(symbol);
@@ -48,6 +52,10 @@ public class NeuralNetwork
         }
     }
     
+    /**
+     * Попытка распознания символа, сравнивая с существующими символами
+     * @return результат распознания символа
+     */
     public String defCharacter()
     {
         suitChars.clear();
@@ -75,6 +83,10 @@ public class NeuralNetwork
         }
     }
     
+    /**
+     * Поиск введенного символа и выбор его за активный
+     * @param symbol Строка из поля ввода символа
+     */
     private void findActiveSymbol(String symbol)
     {
         activeSymbol = null;

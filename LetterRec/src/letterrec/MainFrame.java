@@ -100,6 +100,9 @@ public class MainFrame extends JFrame {
         add(pane1);
     }
 
+    /**
+     * Обучение определенному символу, с предварительным растяжением по полю
+     */
     private void learning()
     {
         drawPane.stretchY();
@@ -107,6 +110,9 @@ public class MainFrame extends JFrame {
         test.recCharacter(symbolField.getText());
     }
     
+    /**
+     * Попытка опознать символ, с предварительным растяжением
+     */
     private void read()
     {
         drawPane.stretchY();
