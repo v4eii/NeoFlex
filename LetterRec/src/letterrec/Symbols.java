@@ -8,10 +8,10 @@ package letterrec;
 public class Symbols {
     private int countPaintedPanel;
     private float[][] weights;
-    private char symbol;
+    private String symbol;
     private float coefSymbol;
 
-    public Symbols(int columnCount, int rowCount, char symbol)
+    public Symbols(int columnCount, int rowCount, String symbol)
     {
         this.symbol = symbol;
         weights = new float[columnCount][rowCount];
@@ -24,7 +24,7 @@ public class Symbols {
         }
     }
 
-    public char getSymbol()
+    public String getSymbol()
     {
         return symbol;
     }

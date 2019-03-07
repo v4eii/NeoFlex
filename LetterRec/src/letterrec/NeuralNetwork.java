@@ -22,7 +22,7 @@ public class NeuralNetwork
         this.rowCount = rowCount;
     }
     
-    public void recCharacter(char symbol)
+    public void recCharacter(String symbol)
     {
         findActiveSymbol(symbol);
         paintedPanel = NeuralNetworkService.searchPaintedPanel(rowCount, columnCount);
@@ -75,12 +75,12 @@ public class NeuralNetwork
         }
     }
     
-    private void findActiveSymbol(char symbol)
+    private void findActiveSymbol(String symbol)
     {
         activeSymbol = null;
         for (Symbols val : characters)
         {
-            if (val.getSymbol() == symbol)
+            if (val.getSymbol().equals(symbol))
                 activeSymbol = val;
         }
         if (activeSymbol == null)

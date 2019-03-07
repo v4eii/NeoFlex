@@ -104,7 +104,7 @@ public class MainFrame extends JFrame {
     {
         drawPane.stretchY();
         drawPane.stretchX();
-        test.recCharacter(symbolField.getText().charAt(0));
+        test.recCharacter(symbolField.getText());
     }
     
     private void read()
